@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caça ao Tesouro Religioso</title>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #fff3e0);
+    }
+    .tela {
+      display: none;
+      padding: 30px;
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .ativa {
+      display: block;
+    }
+    h1, h2 {
+      color: #00695c;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #00897b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      margin-top: 20px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover {
+      background-color: #004d40;
+    }
+    input, select {
+      padding: 10px;
+      margin: 8px 0;
+      width: 100%;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .pergunta {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    label {
+      display: block;
+      margin: 5px 0;
+    }
+    label input {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="tela ativa" id="tela1">
+    <h1>Caça ao Tesouro Religioso</h1>
+    <p>Preencha as informações do grupo:</p>
+    <input type="text" id="escola" placeholder="Nome da Escola" />
+    <input type="text" id="turma" placeholder="Turma" />
+    <input type="text" id="alunos" placeholder="Nomes dos alunos do grupo" />
+    <button onclick="irParaTela2()">Avançar</button>
+  </div>
+
+  <div class="tela" id="tela2">
+    <h2>Escolha o livro sagrado que vocês irão estudar:</h2>
+    <select id="livroSelecionado">
+      <option value="">Selecione...</option>
+      <option value="biblia">📕 Bíblia (Cristianismo)</option>
+      <option value="tora">📜 Torá (Judaísmo)</option>
+      <option value="vedas">📖 Vedas (Hinduísmo)</option>
+      <option value="alcorao">📗 Alcorão (Islamismo)</option>
+      <option value="espiritismo">📙 Livro dos Espíritos (Espiritismo)</option>
+      <option value="mormon">📘 Livro de Mórmon (Mórmons)</option>
+    </select>
+    <button onclick="iniciarQuestoes()">Começar Desafio</button>
+  </div>
+
+  <!-- As demais partes do código permanecem iguais -->

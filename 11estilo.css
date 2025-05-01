@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+.btn-estilizado {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+/* Quando o mouse estiver sobre o botão, ativa a animação contínua */
+.btn-estilizado:hover {
+    animation: bounce 0.6s infinite;
+}
+
+/* Animação bounce: sobe e desce */
+@keyframes bounce {
+    0%   { transform: translateY(0); }
+    25%  { transform: translateY(-8px); }
+    50%  { transform: translateY(4px); }
+    75%  { transform: translateY(-4px); }
+    100% { transform: translateY(0); }
+}

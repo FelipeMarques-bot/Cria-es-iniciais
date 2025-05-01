@@ -1,0 +1,70 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fundo com degradê amarelado */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f9d27d, #e2a84b); /* degradê amarelo suave */
+  color: #4b2f0c; /* cor terrosa escura para contraste */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Título principal */
+h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #fff4d4;
+  text-align: center;
+  margin-bottom: 0.5em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Subtítulo */
+h2 {
+  font-size: 2rem;
+  color: #fff0c2;
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+/* Ícones religiosos ou seções representativas */
+.icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 2rem;
+  color: #5e3e13;
+  flex-wrap: wrap;
+  margin-bottom: 2em;
+}
+
+/* Responsivo: tamanhos menores */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  .icons {
+    font-size: 1.5rem;
+    gap: 15px;
+  }
+  <head>
+  ...
+  <style>
+    /* Cole aqui o CSS do formulário interativo */
+  </style>
+</head>
+}

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caça ao Tesouro Religioso</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #fff3e0);
+    }
+
+    .tela {
+      display: none;
+      padding: 30px;
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .ativa {
+      display: block;
+    }
+
+    h1, h2 {
+      color: #00695c;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #00897b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      margin-top: 20px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #004d40;
+    }
+
+    input, select {
+      padding: 10px;
+      margin: 8px 0;
+      width: 100%;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .pergunta {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin: 5px 0;
+    }
+
+    label input {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="tela ativa" id="tela1">
+    <h1>Caça ao Tesouro Religioso</h1>
+    <p>Preencha as informações do grupo:</p>
+    <input type="text" id="escola" placeholder="Nome da Escola" />
+    <input type="text" id="turma" placeholder="Turma" />
+    <input type="text" id="alunos" placeholder="Nomes dos alunos do grupo" />
+    <button onclick="irParaTela2()">Avançar</button>
+  </div>
+
+  <div class="tela" id="tela2">
+    <h2>Escolha o livro sagrado que vocês irão estudar:</h2>
+    <select id="livroSelecionado">
+      <option value="">Selecione...</option>
+      <option value="biblia">📕 Bíblia (Cristianismo)</option>
+      <option value="tora">📜 Torá (Judaísmo)</option>
+      <option value="vedas">📖 Vedas (Hinduísmo)</option>
+      <option value="alcorao">📗 Alcorão (Islamismo)</option>
+      <option value="espiritismo">📙 Livro dos Espíritos (Espiritismo)</option>
+      <option value="mormon">📘 Livro de Mórmon (Mórmons)</option>
+    </select>
+    <button onclick="iniciarQuestoes()">Começar Desafio</button>
+  </div>
+
+  <div class="tela" id="tela3">
+    <h2 id="tituloQuiz"></h2>
+    <form id="formQuiz" onsubmit="finalizarQuiz(event)"></form>
+  </div>
+
+  <div class="tela" id="tela4">
+    <h2>Desafio Final!</h2>
+    <p>Agora vocês devem preparar uma apresentação com base no que aprenderam.</p>
+    <p><strong>Oriente-se pelas perguntas abaixo e escreva as respostas no caderno. A apresentação valerá 2 pontos!</strong></p>
+    <div id="desafioFinal"></div>
+    <button onclick="reiniciar()">Concluir</button>
+  </div>
+
+  <script>
+    const perguntas = {
+      biblia: {
+        titulo: '📕 Bíblia (Cristianismo)',
+        questoes: [
+          { q: "Quantos livros tem a Bíblia protestante?", a: ["66", "73", "80", "100"], c: "66" },
+          { q: "O que significa a palavra 'Bíblia'?", a: ["Testemunho", "Escritura", "Livros", "Palavra"], c: "Livros" },
+          { q: "Como a Bíblia está organizada?", a: ["Em dois testamentos", "Em três partes", "Apenas no Novo Testamento", "Apenas nos Evangelhos"], c: "Em dois testamentos" },
+          { q: "Quantos livros tem a Bíblia católica?", a: ["66", "73", "80", "100"], c: "73" },
+          { q: "Qual é a diferença entre revelação e inspiração?", a: ["Revelação é quando Deus manifesta verdades de fé; inspiração é Deus movendo o homem a escrever", "São iguais", "Revelação só aconteceu com Jesus", "Inspiração são sonhos proféticos"], c: "Revelação é quando Deus manifesta verdades de fé; inspiração é Deus movendo o homem a escrever" }
+        ],
+        desafio: `<ul><li>Como a Bíblia está organizada e quais suas principais partes?</li><li>Qual a mensagem central da Bíblia?</li></ul>`
+      }
+    };
+
+    function irParaTela2() {
+      if (!document.getElementById('escola').value || !document.getElementById('turma').value || !document.getElementById('alunos').value) {
+        alert('Preencha todos os campos.');
+        return;
+      }
+      mudarTela('tela1', 'tela2');
+    }
+
+    function iniciarQuestoes() {
+      const livro = document.getElementById('livroSelecionado').value;
+      if (!livro || !perguntas[livro]) {
+        alert('Escolha um livro válido.');
+        return;
+      }
+      const quiz = perguntas[livro];
+      document.getElementById('tituloQuiz').innerText = quiz.titulo;
+      const form = document.getElementById('formQuiz');
+      form.innerHTML = '';
+      quiz.questoes.forEach((q, i) => {
+        const div = document.createElement('div');
+        div.className = 'pergunta';
+        div.innerHTML = `<p><strong>${i+1}. ${q.q}</strong></p>` +
+          q.a.map(a => `<label><input type="radio" name="q${i}" value="${a}" required> ${a}</label>`).join('');
+        form.appendChild(div);
+      });
+      form.innerHTML += '<button type="submit">Finalizar Respostas</button>';
+      mudarTela('tela2', 'tela3');
+    }
+
+    function finalizarQuiz(event) {
+      event.preventDefault();
+      const livro = document.getElementById('livroSelecionado').value;
+      const quiz = perguntas[livro];
+      let acertos = 0;
+      quiz.questoes.forEach((q, i) => {
+        const resposta = document.querySelector(`input[name="q${i}"]:checked`).value;
+        if (resposta === q.c) acertos++;
+      });
+      alert(`Vocês acertaram ${acertos} de ${quiz.questoes.length} questões.`);
+      document.getElementById('desafioFinal').innerHTML = quiz.desafio;
+      mudarTela('tela3', 'tela4');
+    }
+
+    function mudarTela(atual, proxima) {
+      document.getElementById(atual).classList.remove('ativa');
+      document.getElementById(proxima).classList.add('ativa');
+    }
+
+    function reiniciar() {
+      location.reload();
+    }
+  </script>
+</body>
+</html>
